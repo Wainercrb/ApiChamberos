@@ -9,6 +9,7 @@ const user = new Schema({
     email: { type: String },
     pass: { type: String },
     latitud: { type: String },
-    logintud: { type: String }
+    logitud: { type: String },
+    approvalstatus: {type: Boolean}
 });
 module.exports = mongoose.model('users', user);
