@@ -14,7 +14,7 @@ exports.sendEmail = function (body, res) {
         service: 'Gmail',
         auth: {
             user: 'roke12chacon@gmail.com',
-            pass: 'Saprissa'
+            pass: '*********'
         }
     });
     // Definimos el email
