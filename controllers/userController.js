@@ -18,6 +18,12 @@ exports.findAllUsers = function (req, res) {
 }
 // find user by id
 exports.findById = function (req, res) {
+    // id validation
+    if (!req.params.id) {
+        return res.status(500).send({
+            message: 'The id was not found'
+        });
+    }
     User.findById(req.params.id, function (err, user) {
         if (err) {
             res.status(422);
@@ -69,6 +75,12 @@ exports.updateUser = function (req, res) {
             erros: req.validationErrors()
         });
     }
+    // id validation
+    if (!req.params.id) {
+        return res.status(500).send({
+            message: 'The id was not found'
+        });
+    }
     User.findByIdAndUpdate(req.params.id, update, () => {})
         .then(user => {
             if (!user) {
@@ -90,17 +102,23 @@ exports.deleteUser = function (req, res) {
     // id validation
     if (!req.params.id) {
         return res.status(500).send({
-            message: 'Error when removing the user'
+            message: 'The id was not found'
         });
     }
     User.findByIdAndRemove(req.params.id, (err, data) => {
         if (err) {
-            res.status(500).send({message: 'Error when removing the user'});
+            res.status(500).send({
+                message: 'Error when removing the user'
+            });
         } else {
             if (!data) {
-                res.status(404).send({message: 'The user could not be deleted'});
+                res.status(404).send({
+                    message: 'The user could not be deleted'
+                });
             } else {
-                res.status(200).send({message: 'User deleted'});
+                res.status(200).send({
+                    message: 'User deleted'
+                });
             }
         }
     });
