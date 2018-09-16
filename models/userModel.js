@@ -7,9 +7,9 @@ const user = new Schema({
     age: { type: String },
     gender: { type: String},
     email: { type: String },
-    pass: { type: String },
+    password: { type: String },
     latitud: { type: String },
-    logitud: { type: String },
+    longitud: { type: String },
     approvalstatus: {type: Boolean}
 });
 module.exports = mongoose.model('users', user);
