@@ -6,7 +6,7 @@ var nodemailer = require('nodemailer');
  * @method sendEmail
  * @param {} body
  * @param {} res response saliente al cliente
- * @return 
+ * @return status of succesfull
  */
 exports.sendEmail = function (body, res) {
     // Definimos el transporter
@@ -21,8 +21,8 @@ exports.sendEmail = function (body, res) {
     var mailOptions = {
         from: 'Remitente',
         to: body.email,
-        subject: 'Confirmacion de registro TUBEKIDS',
-        text: 'TUBEKIDS  link de confirmacion : ' + body.link
+        subject: 'Confirmacion de registro CHAMBEROS',
+        text: 'CHAMBEROS  link de confirmacion : ' + body.link
     };
     // Enviamos el email
     transporter.sendMail(mailOptions, function (error, info) {

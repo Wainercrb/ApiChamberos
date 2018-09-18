@@ -5,11 +5,11 @@ var validator = require("email-validator");
 
 
 /**
- * Description
+ * Find all the users
  * @method findAllUsers
  * @param {} req
  * @param {} res
- * @return 
+ * @return list of users
  */
 exports.findAllUsers = function (req, res) {
 
@@ -25,11 +25,11 @@ exports.findAllUsers = function (req, res) {
 
 
 /**
- * Description
+ * Find by Id a specific user
  * @method findById
  * @param {} req
  * @param {} res
- * @return 
+ * @return user(object)
  */
 exports.findById = function (req, res) {
     User.findById(req.params.id, function (err, user) {
@@ -45,11 +45,11 @@ exports.findById = function (req, res) {
 
 
 /**
- * Description
+ * Add new User
  * @method addUser
  * @param {} req
  * @param {} res
- * @return 
+ * @return status code
  */
 exports.addUser = function (req, res) {
 
@@ -88,11 +88,11 @@ exports.addUser = function (req, res) {
 
 
 /**
- * Description
+ * update a specific user
  * @method updateUser
  * @param {} req
  * @param {} res
- * @return 
+ * @return specific user
  */
 exports.updateUser = function (req, res) {
     var update = req.body;
@@ -115,11 +115,11 @@ exports.updateUser = function (req, res) {
 
 
 /**
- * Description
+ * Update a specific user 
  * @method deleteUser
  * @param {} req
  * @param {} res
- * @return 
+ * @return status code
  */
 exports.deleteUser = function (req, res) {
     req.body.approvalstatus = false;

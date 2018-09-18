@@ -5,11 +5,11 @@ var Profession = mongoose.model('professions');
 
 
 /**
- * Description
+ * FInd all Professions
  * @method findAllProfessions
  * @param {} req
  * @param {} res
- * @return 
+ * @return  the profession
  */
 exports.findAllProfessions= function (req, res) {
 
@@ -25,11 +25,11 @@ exports.findAllProfessions= function (req, res) {
 
 
 /**
- * Description
+ * FInd by Id a profession
  * @method findById
  * @param {} req
  * @param {} res
- * @return 
+ * @return profession(object)
  */
 exports.findById = function (req, res) {
     Profession.findById(req.params.id, function (err, profession) {
@@ -44,11 +44,11 @@ exports.findById = function (req, res) {
 };
 
 /**
- * Description
+ * add new profession
  * @method addProfession
  * @param {} req
  * @param {} res
- * @return 
+ * @return profession (object)
  */
 exports.addProfession = function (req, res) {
 
@@ -68,11 +68,11 @@ exports.addProfession = function (req, res) {
 };
 
 /**
- * Description
+ * Update a specific profession
  * @method updateProfession
  * @param {} req
  * @param {} res
- * @return 
+ * @return Profession updated
  */
 exports.updateProfession = function (req, res) {
     var update = req.body;
@@ -95,11 +95,12 @@ exports.updateProfession = function (req, res) {
 
 
 /**
- * Description
+ * Delete a profession, in this case
+ * the method update the atribute status
  * @method deleteProfession
  * @param {} req
  * @param {} res
- * @return 
+ * @return message and code status
  */
 exports.deleteProfession = function (req, res) {
 
@@ -114,7 +115,7 @@ exports.deleteProfession = function (req, res) {
             if (!updateProfession) {
                 res.status(404).send({ message: 'No se ha podido actualizar el profesion' });
             } else {
-                res.status(200).send({ message: 'Profesion  Actualizado' });
+                res.status(200).send({ message: 'Profesion  Eliminada' });
             }
         }
 

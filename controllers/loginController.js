@@ -7,11 +7,11 @@ var User = mongoose.model('users');
 var user = new User;
 
 /**
- * Description
+ * Find the user
  * @method findUserUsername
  * @param {} req
  * @param {} res
- * @return 
+ * @return code. 
  */
 exports.findUserUsername = function (req, res) {
 
