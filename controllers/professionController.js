@@ -4,6 +4,13 @@ var Profession = mongoose.model('professions');
 
 
 
+/**
+ * Description
+ * @method findAllProfessions
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.findAllProfessions= function (req, res) {
 
     Profession.find(function (err, professions) {
@@ -17,6 +24,13 @@ exports.findAllProfessions= function (req, res) {
 };
 
 
+/**
+ * Description
+ * @method findById
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.findById = function (req, res) {
     Profession.findById(req.params.id, function (err, profession) {
         if (err) {
@@ -29,6 +43,13 @@ exports.findById = function (req, res) {
 
 };
 
+/**
+ * Description
+ * @method addProfession
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.addProfession = function (req, res) {
 
     var profession = new Profession();
@@ -46,6 +67,13 @@ exports.addProfession = function (req, res) {
     });
 };
 
+/**
+ * Description
+ * @method updateProfession
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.updateProfession = function (req, res) {
     var update = req.body;
     Profession.findByIdAndUpdate(req.params.id, update, (err, updateProfession) => {
@@ -66,6 +94,13 @@ exports.updateProfession = function (req, res) {
 }
 
 
+/**
+ * Description
+ * @method deleteProfession
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.deleteProfession = function (req, res) {
 
     req.body.status = false;

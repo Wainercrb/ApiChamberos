@@ -4,9 +4,9 @@ var nodemailer = require('nodemailer');
 /**
  * Metodo para enviar correos.
  * @method sendEmail
-* @param {} req request proveniente del cliente
+ * @param {} body
  * @param {} res response saliente al cliente
- * @return un codigo si se envia el correo exitosamente o de igual manera sino.
+ * @return 
  */
 exports.sendEmail = function (body, res) {
     // Definimos el transporter

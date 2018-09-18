@@ -6,6 +6,13 @@ var User = mongoose.model('users');
 
 var user = new User;
 
+/**
+ * Description
+ * @method findUserUsername
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.findUserUsername = function (req, res) {
 
   User.findOne({ email: req.body.email }, {}, function (err, user) {
