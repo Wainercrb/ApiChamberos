@@ -98,7 +98,5 @@ exports.deleteProfession = function (req, res) {
                 });
             }
         }
-
-
     });
 }
