@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var Profession = mongoose.model('professions');
-
-
+var Profession = require('../models/professionModel');
 
 /**
  * FInd all Professions
@@ -85,21 +83,21 @@ exports.updateProfession = function (req, res) {
             message: 'The id was not found'
         });
     }
-    Profession.findByIdAndUpdate(req.params.id, update, () => {})
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({
-                    message: `Profession not found with id ${req.params.id}`
+    Profession.findByIdAndUpdate(req.params.id, update, {
+            new: true
+        }, function (err, profession) {
+            if (err) {
+                res.status(422);
+                res.json({
+                    error: err
                 });
             }
-            res.send(user);
-        }).catch(err => {
-            res.status(404);
-            es.json({
-                error: err
-            });
-        });
-}
+            res.status(201);
+            res.json(profession);
+        }
+
+    )
+};
 
 /**
  * Delete a profession, in this case
@@ -135,5 +133,3 @@ exports.deleteProfession = function (req, res) {
         }
     });
 }
-
-

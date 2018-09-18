@@ -6,3 +6,6 @@ const profession = new Schema({
     status :{type: Boolean}
 });
 module.exports = mongoose.model('professions', profession);
+
+
+

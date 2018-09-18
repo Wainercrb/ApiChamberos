@@ -17,6 +17,7 @@ app.use(cors());
 
 
 var UserCTRL = require('./controllers/userController');
+var ProfessionCTRL = require('./controllers/professionController');
 var LoginController = require('./controllers/loginController');
 
 app.set('view engine', 'pug');
@@ -45,19 +46,32 @@ app.use('/api', login);
 
 
 //API ROUTES USER
-
 var user = express.Router();
-
 user.route('/users')
-    .get(md_auth.ensureAuth, UserCTRL.findAllUsers)
-    .post(UserCTRL.addUser);
+.get(md_auth.ensureAuth, UserCTRL.findAllUsers)
+.post(UserCTRL.addUser);
 
 user.route('/users/:id')
-    .get(md_auth.ensureAuth, UserCTRL.findById)
-    .put(md_auth.ensureAuth, UserCTRL.updateUser)
-    .delete(md_auth.ensureAuth, UserCTRL.deleteUser);
+.get(md_auth.ensureAuth, UserCTRL.findById)
+.put(md_auth.ensureAuth, UserCTRL.updateUser)
+.delete(md_auth.ensureAuth, UserCTRL.deleteUser);
+
+//API ROUTES PROFESSION
+var profession = express.Router();
+
+profession.route('/profession')
+.get(md_auth.ensureAuth, ProfessionCTRL.findAllProfessions)
+.post(ProfessionCTRL.addProfession);
+
+profession.route('/profession/:id')
+.get(md_auth.ensureAuth, ProfessionCTRL.findById)
+.put(md_auth.ensureAuth, ProfessionCTRL.updateProfession)
+.delete(md_auth.ensureAuth, ProfessionCTRL.deleteProfession);
 
 
+
+
+app.use('/api', profession);
 app.use('/api', user);
 
 
