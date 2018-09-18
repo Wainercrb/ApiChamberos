@@ -29,9 +29,9 @@ exports.findUserUsername = function (req, res) {
         bcrypt.compare(req.body.password, user.password, function (err, check) {
           if (check) {
             //si esta verificada la cuenta
-            if (!user.isVerificated) {
-              res.status(401).send({ message: 'Cuenta NO verificada' });
-            }
+            // if (!user.isVerificated) {
+            //   res.status(401).send({ message: 'Cuenta NO verificada' });
+            // }
             //devolver los datos del usuario logueado
             if (req.body.gethash) {
               //devolver un token jwt
