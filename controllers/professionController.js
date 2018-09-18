@@ -3,7 +3,6 @@ var Profession = mongoose.model('professions');
 
 
 
-<<<<<<< HEAD
 /**
  * FInd all Professions
  * @method findAllProfessions
@@ -11,11 +10,7 @@ var Profession = mongoose.model('professions');
  * @param {} res
  * @return  the profession
  */
-exports.findAllProfessions= function (req, res) {
-=======
 exports.findAllProfessions = function (req, res) {
->>>>>>> User
-
     Profession.find(function (err, professions) {
         if (err) {
             res.status(422);
@@ -84,33 +79,27 @@ exports.addProfession = function (req, res) {
  */
 exports.updateProfession = function (req, res) {
     var update = req.body;
-    Profession.findByIdAndUpdate(req.params.id, update, (err, updateProfession) => {
-
-        if (err) {
-            res.status(500).send({
-                message: 'Error al actualizar el profesion'
-            });
-
-        } else {
-            if (!updateProfession) {
-                res.status(404).send({
-                    message: 'No se ha podido actualizar el profesion'
+    // id validation
+    if (!req.params.id) {
+        return res.status(500).send({
+            message: 'The id was not found'
+        });
+    }
+    Profession.findByIdAndUpdate(req.params.id, update, () => {})
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    message: `Profession not found with id ${req.params.id}`
                 });
-            } else {
-<<<<<<< HEAD
-                res.status(200).send({ profession :updateProfessions });
-=======
-                res.status(200).send({
-                    message: 'Profesion  Actualizado'
-                });
->>>>>>> User
             }
-        }
-
-
-    });
+            res.send(user);
+        }).catch(err => {
+            res.status(404);
+            es.json({
+                error: err
+            });
+        });
 }
-
 
 /**
  * Delete a profession, in this case
@@ -122,29 +111,29 @@ exports.updateProfession = function (req, res) {
  */
 exports.deleteProfession = function (req, res) {
 
-    req.body.status = false;
-    var update = req.body;
-    Profession.findByIdAndUpdate(req.params.id, update, (err, updateProfession) => {
-
+    // id validation
+    if (!req.params.id) {
+        return res.status(500).send({
+            message: 'The id was not found'
+        });
+    }
+    Profession.findByIdAndRemove(req.params.id, (err, data) => {
         if (err) {
             res.status(500).send({
-                message: 'Error al actualizar el profesion'
+                message: 'Error when removing the Profession'
             });
-
         } else {
-            if (!updateProfession) {
+            if (!data) {
                 res.status(404).send({
-                    message: 'No se ha podido actualizar el profesion'
+                    message: 'The Profession could not be deleted'
                 });
             } else {
-<<<<<<< HEAD
-                res.status(200).send({ message: 'Profesion  Eliminada' });
-=======
                 res.status(200).send({
-                    message: 'Profesion  Actualizado'
+                    message: 'Profession deleted'
                 });
->>>>>>> User
             }
         }
     });
 }
+
+
