@@ -57,7 +57,7 @@ exports.updateProfession = function (req, res) {
             if (!updateProfession) {
                 res.status(404).send({ message: 'No se ha podido actualizar el profesion' });
             } else {
-                res.status(200).send({ message: 'Profesion  Actualizado' });
+                res.status(200).send({ profession :updateProfessions });
             }
         }
 
