@@ -16,6 +16,7 @@ app.use(cors());
 
 
 
+
 var UserCTRL = require('./controllers/userController');
 var ProfessionCTRL = require('./controllers/professionController');
 var LoginController = require('./controllers/loginController');
@@ -84,5 +85,6 @@ app.use(function (req, res, next) {
     return;
 });
 
-
-app.listen(3000, () => console.log('API is listening on port 3000!'));
+var listener = app.listen(8888, function(){
+    console.log('Listening on port ' + listener.address().port); //Listening on port 8888
+});
