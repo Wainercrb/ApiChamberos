@@ -21,6 +21,7 @@ var UserCTRL = require('./controllers/userController');
 var ProfessionCTRL = require('./controllers/professionController');
 var LoginController = require('./controllers/loginController');
 
+
 app.set('view engine', 'pug');
 // this is where we can put the public contents like css and js files
 app.use(express.static(__dirname + '/public'));
