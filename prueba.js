@@ -4,7 +4,7 @@ const validator = require('express-validator');
 const db = mongoose.connect('mongodb://localhost:27017/db_chamberos');
 const app = express();
 const cors = require('cors');
-var md_auth = require('../APIChamberos/middleware/authenticate');
+var md_auth = require('./middleware/authenticate');
 const bodyParser = require('body-parser');
 
 
