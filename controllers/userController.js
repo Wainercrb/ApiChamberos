@@ -68,8 +68,9 @@ exports.addUser = function (req, res) {
             erros: req.validationErrors()
         });
     }
-    //format:{YYYY-MM-DD}
-    if (new moment(req.body.birthdate).isValid() && new AgeFromDate(new Date(req.body.birthdate)).age <= 17){
+    //format:{YYYY-MM-DD} 
+    // validate age --> new AgeFromDate(new Date(req.body.birthdate)).age <= 17
+    if (new moment(req.body.birthdate).isValid()){
         return res.status(400).send({
             message: 'Age incorrect'
         });
