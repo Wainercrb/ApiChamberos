@@ -67,29 +67,27 @@ exports.addUser = function (req, res) {
             erros: req.validationErrors()
         });
     }
-    if (validator.validate(req.body.email)) {
-        var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-        var user = new User();
-        user.name = req.body.name;
-        user.lastName = req.body.lastName;
-        user.password = hashedPassword;
-        user.age = req.body.age;
-        user.email = req.body.email;
-        user.gender = req.body.gender;
-        user.latitud = req.body.latitud;
-        user.longitud = req.body.longitud;
-        user.approvalstatus = true;
-        user.save(function (err, user) {
-            if (err) {
-                res.status(422);
-                res.json({
-                    error: err
-                });
-            }
-            res.status(200);
-            res.json(user);
-        });
-    }
+    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+    var user = new User();
+    user.name = req.body.name;
+    user.surnames = req.body.surnames;
+    user.password = hashedPassword;
+    user.age = req.body.age;
+    user.email = req.body.email;
+    user.gender = req.body.gender;
+    user.latitud = req.body.latitud;
+    user.longitud = req.body.longitud;
+    user.approvalstatus = true;
+    user.save(function (err, user) {
+        if (err) {
+            res.status(422);
+            res.json({
+                error: err
+            });
+        }
+        res.status(200);
+        res.json(user);
+    });
 }
 
 /**
