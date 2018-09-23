@@ -70,7 +70,7 @@ exports.addUser = function (req, res) {
     }
     //format:{YYYY-MM-DD} 
     // validate age --> new AgeFromDate(new Date(req.body.birthdate)).age <= 17
-    if (!new moment(req.body.birthdate).isValid()){
+    if (!moment(req.body.birthdate, "DD-MM-YYYY")){
         return res.status(400).send({
             erros: 'Invalid birthdate'
         });
@@ -179,7 +179,7 @@ function validateUserData(req) {
     req.checkBody('latitud', 'Invalid latitud').notEmpty();
     req.checkBody('longitud', 'Invalid longitud').notEmpty();
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-    req.checkBody('phone', 'Invalid phone').notEmpty().isPhone();
+    req.checkBody('phone', 'Invalid phone').notEmpty();
     req.checkBody('approvalstatus', 'Invalid approvalstatus').notEmpty().isBoolean();
     return req.validationErrors();
 }
