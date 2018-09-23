@@ -78,6 +78,7 @@ exports.addUser = function (req, res) {
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
     var user = new User();
     user.name = req.body.name;
+    user.professionId = req.body.professionId;
     user.surnames = req.body.surnames;
     user.password = hashedPassword;
     user.birthdate = req.body.birthdate;
