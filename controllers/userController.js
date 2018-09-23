@@ -65,6 +65,7 @@ exports.addUser = function (req, res) {
 
 
             user.lastName = req.body.lastName;
+            user.professionId = req.body.professionId;
             user.country = req.body.country;
             user.password = hashedPassword;
             user.birthDate = req.body.birthDate;
