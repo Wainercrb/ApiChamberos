@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/userModel');
 var bcrypt = require('bcryptjs');
 var moment = require('moment');
-var {AgeFromDateString, AgeFromDate} = require('age-calculator');
+//var {AgeFromDateString, AgeFromDate} = require('age-calculator');
 
 
 /**
@@ -70,9 +70,9 @@ exports.addUser = function (req, res) {
     }
     //format:{YYYY-MM-DD} 
     // validate age --> new AgeFromDate(new Date(req.body.birthdate)).age <= 17
-    if (new moment(req.body.birthdate).isValid()){
+    if (!new moment(req.body.birthdate).isValid()){
         return res.status(400).send({
-            message: 'Age incorrect'
+            erros: 'Invalid birthdate'
         });
     }
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
@@ -82,6 +82,7 @@ exports.addUser = function (req, res) {
     user.password = hashedPassword;
     user.birthdate = req.body.birthdate;
     user.email = req.body.email;
+    user.phone = req.body.phone;
     user.gender = req.body.gender;
     user.latitud = req.body.latitud;
     user.longitud = req.body.longitud;
@@ -178,6 +179,7 @@ function validateUserData(req) {
     req.checkBody('latitud', 'Invalid latitud').notEmpty();
     req.checkBody('longitud', 'Invalid longitud').notEmpty();
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
+    req.checkBody('phone', 'Invalid phone').notEmpty().isPhone();
     req.checkBody('approvalstatus', 'Invalid approvalstatus').notEmpty().isBoolean();
     return req.validationErrors();
 }
