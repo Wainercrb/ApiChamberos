@@ -62,7 +62,7 @@ user.route('/users/:id')
 var profession = express.Router();
 
 profession.route('/profession')
-.get(md_auth.ensureAuth, ProfessionCTRL.findAllProfessions)
+.get(ProfessionCTRL.findAllProfessions)
 .post(ProfessionCTRL.addProfession);
 
 profession.route('/profession/:id')
