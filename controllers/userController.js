@@ -53,6 +53,34 @@ exports.findById = function (req, res) {
 
 };
 
+/**
+ * Find by Id a specific user
+ * @method findById
+ * @param {} req
+ * @param {} res
+ * @return user(object)
+ */
+exports.findByIdSearch = function (req, res) {
+    // id validation
+    if (!req.params.id) {
+        return res.status(500).send({
+            message: 'The id was not found'
+        });
+    }
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            res.status(422);
+            res.json({
+                error: err
+            });
+        }
+        res.status(200);
+        res.json(user);
+    });
+
+};
+
+
 
 exports.findByProfession = function (req, res) {
     // id validation

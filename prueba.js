@@ -60,6 +60,9 @@ user.route('/users/:id')
 
 user.route('/users/professions/:professionId/:latitud/:longitud/:radius')
 .get(UserCTRL.findByProfession)
+
+user.route('/users/search/:id')
+.get(UserCTRL.findByIdSearch)
 //API ROUTES PROFESSION
 var profession = express.Router();
 
