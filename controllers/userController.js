@@ -61,7 +61,14 @@ exports.findByProfession = function (req, res) {
             message: 'The professionId was not found'
         });
     }
-    User.findOne({professionId:req.body.professionId}, function (err, user) {
+    User.find({
+        "professionId": {
+            "_id": [
+                req.params.professionId
+            ]
+        }
+     
+    }, function (err, user) {
         if (err) {
             res.status(422);
             res.json({
