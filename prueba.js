@@ -61,11 +61,11 @@ user.route('/users/:id')
 //API ROUTES PROFESSION
 var profession = express.Router();
 
-profession.route('/profession')
+profession.route('/professions')
 .get(ProfessionCTRL.findAllProfessions)
 .post(ProfessionCTRL.addProfession);
 
-profession.route('/profession/:id')
+profession.route('/professions/:id')
 .get(ProfessionCTRL.findById)
 .put(md_auth.ensureAuth, ProfessionCTRL.updateProfession)
 .delete(md_auth.ensureAuth, ProfessionCTRL.deleteProfession);
