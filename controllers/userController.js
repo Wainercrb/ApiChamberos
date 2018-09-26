@@ -85,8 +85,6 @@ exports.findByProfession = function (req, res) {
     });
 
 };
-
-
 /**
  * Add new User
  * @method addUser
