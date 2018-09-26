@@ -61,6 +61,11 @@ exports.findByProfession = function (req, res) {
             message: 'The professionId was not found'
         });
     }
+    if (!req.params.latitud || !req.params.longitud) {
+        return res.status(500).send({
+            message: 'The locations was not found'
+        });
+    }
     User.find({
         "professionId": {
             "_id": [
@@ -76,7 +81,7 @@ exports.findByProfession = function (req, res) {
             });
         }
         res.status(200);
-        res.json(user);
+        res.json(filterUser(user, req.params.latitud, req.params.longitud));
     });
 
 };
@@ -212,3 +217,43 @@ function validateUserData(req) {
     req.checkBody('approvalstatus', 'Invalid approvalstatus').notEmpty().isBoolean();
     return req.validationErrors();
 }
+
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    const radio = 6371,
+      dLat = deg2rad(lat2 - lat1),
+      dLon = deg2rad(lon2 - lon1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) *
+        Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    return radio * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+
+
+  function filterUser(users, nowLatitd, nowLongitud) {
+    let response = [];
+    for (let user of users) {
+      let dtc = getDistance(
+        nowLatitd,
+        nowLongitud,
+        user.latitud,
+        user.longitud
+      );
+      if (dtc) {
+        response.push({ user: user, km: Number(dtc.toFixed(2)) });
+      }
+    }
+    //order items by km
+    response.sort(function(obj1, obj2) {
+      return obj1.km - obj2.km;
+    });
+
+    return response;
+  }
