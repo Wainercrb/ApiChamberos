@@ -54,6 +54,27 @@ exports.findById = function (req, res) {
 };
 
 
+exports.findByProfession = function (req, res) {
+    // id validation
+    if (!req.params.professionId) {
+        return res.status(500).send({
+            message: 'The professionId was not found'
+        });
+    }
+    User.findOne({professionId:req.body.professionId}, function (err, user) {
+        if (err) {
+            res.status(422);
+            res.json({
+                error: err
+            });
+        }
+        res.status(200);
+        res.json(user);
+    });
+
+};
+
+
 /**
  * Add new User
  * @method addUser
