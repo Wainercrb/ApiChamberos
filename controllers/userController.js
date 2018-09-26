@@ -61,7 +61,7 @@ exports.findByProfession = function (req, res) {
             message: 'The professionId was not found'
         });
     }
-    if (!req.params.latitud || !req.params.longitud) {
+    if (!req.params.latitud || !req.params.longitud || req.params.radius <= 0) {
         return res.status(500).send({
             message: 'The locations was not found'
         });
@@ -81,7 +81,7 @@ exports.findByProfession = function (req, res) {
             });
         }
         res.status(200);
-        res.json(filterUser(user, req.params.latitud, req.params.longitud));
+        res.json(filterUser(user, req.params.latitud, req.params.longitud, req.params.radius));
     });
 
 };
@@ -237,7 +237,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
   }
 
 
-  function filterUser(users, nowLatitd, nowLongitud) {
+  function filterUser(users, nowLatitd, nowLongitud, radius) {
     let response = [];
     for (let user of users) {
       let dtc = getDistance(
@@ -246,7 +246,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
         user.latitud,
         user.longitud
       );
-      if (dtc) {
+      if (dtc <= radius) {
         response.push({ user: user, km: Number(dtc.toFixed(2)) });
       }
     }

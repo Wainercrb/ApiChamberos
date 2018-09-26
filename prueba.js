@@ -58,7 +58,7 @@ user.route('/users/:id')
 .put(md_auth.ensureAuth, UserCTRL.updateUser)
 .delete(md_auth.ensureAuth, UserCTRL.deleteUser);
 
-user.route('/users/professions/:professionId/:latitud/:longitud')
+user.route('/users/professions/:professionId/:latitud/:longitud/:radius')
 .get(UserCTRL.findByProfession)
 //API ROUTES PROFESSION
 var profession = express.Router();
